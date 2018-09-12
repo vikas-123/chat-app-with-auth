@@ -1,0 +1,77 @@
+body{
+	height: 100%
+}
+.logo{
+	width: 130px;
+	margin: auto;
+}
+.last{
+	height: 130px;
+	width: 130px;
+	padding-top: 10px;
+	padding-left:  60px;
+padding-bottom: 20px;}
+.footer{
+    color: #000;
+		background-color: black;
+    height: 150px;;
+    left: 0;
+		right: 0;
+		text-align: center;
+		bottom: 0;
+     //changed to relative from fixed also works if position is not there
+    font-size: small;
+		clear:both;
+    width:100%;
+}
+.jumbtron{
+	margin-bottom: 150px;
+	height: 60%;
+}
+
+#container{
+			width:700px;
+			margin:0 auto;
+		}
+
+		#chatWindow{
+			height:300px;
+		}
+
+		#mainWrapper{
+			display: none;
+		}
+
+		#chatWrapper{
+			float:left;
+			border:1px #ccc solid;
+			border-radius: 10px;
+			background:#f4f4f4;
+			padding:10px;
+		}
+
+		#userWrapper{
+			float:left;
+			border:1px #ccc solid;
+			border-radius: 10px;
+			background:#f4f4f4;
+			padding:10px;
+			margin-left:20px;
+			width:150px;
+			max-height:200px;
+		}
+
+		#namesWrapper{
+			float:left;
+			border:1px #ccc solid;
+			border-radius: 10px;
+			background:#f4f4f4;
+			padding:10px;
+			margin-left:20px;
+			
+		}
+
+		input{
+			height:30px;
+			border:solid 1px #ccc;
+		}

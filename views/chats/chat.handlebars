@@ -1,0 +1,76 @@
+<div id="container">
+		<div id="namesWrapper">
+			<h2>ChatIO</h2>
+			<p>Create Username:</p>
+			<div id="error"></div>
+			<form id="usernameForm">
+				<input type="text" size="35" id="username">
+				<input type="submit" value="Submit">
+			</form>
+		</div>
+
+		<div id="mainWrapper">
+			<h2>ChatIO</h2>
+			<div id="chatWrapper">
+				<div id="chatWindow"></div>
+				<form id="messageForm">
+					<input type="text" size="35" id="message" placeholder="Say Something...">
+					<input type="submit" value="Submit">
+				</form>
+			</div>
+
+			<div id="userWrapper">
+				<div id="users"></div>
+			</div>
+		</div>
+	</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="http://localhost:7000/socket.io/socket.io.js"></script>
+
+<script>
+	$(function(){
+		var socket = io.connect("http://localhost:7000");
+		var $messageForm = $('#messageForm');
+		var $message = $('#message');
+		var $chat = $('#chatWindow');
+		var $usernameForm = $('#usernameForm');
+		var $users = $('#users');
+		var $username = $('#username');
+		var $error = $('#error');
+
+		$usernameForm.submit(function(e){
+			e.preventDefault();
+			socket.emit('new user',$username.val(),function(data){
+				if(data)
+				{
+					$('#namesWrapper').hide();
+					$('#mainWrapper').show();
+				}
+
+				else
+				{
+					$error.html('Username Is Taken');
+				}
+			});
+		});
+
+		    socket.on('usernames',function(data){
+		    	var html ='';
+		    	for(i=0;i<data.length;i++)
+		    	{
+		    		html += data[i]+ '<br>';
+		    	}
+		    	 $users.html(html);
+		    })
+
+		$messageForm.submit(function(e){
+			e.preventDefault();
+			socket.emit('send message' , $message.val());
+			$message.val('');
+		});
+		socket.on('new message' ,function(data){
+			$chat.append('<strong>  ' + data.user + '</strong>:  '+ data.msg+ '<br>');
+		});
+	});
+</script>
